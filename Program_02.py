@@ -1,4 +1,3 @@
-
 # Generate 1 random number (0-100)
 # Ask the user to guess the number
 # Display “Greater than” if the inputed number is greater than the random number
@@ -28,3 +27,4 @@ while user_guess == False:
         if user_num == comp_num:
             # user get the correct answer
             print("Are you a sage? Because you guess it right.")
+            break
