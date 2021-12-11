@@ -6,67 +6,57 @@
 # Display ”Try again y/n” after each game
 # If the user enter “y” the user will play again
 # if “n” the program will exit.
-
 import random
 
 # computer will generate 3 random numbers between 0 to 9.
-
-
-def get_num_comp():
+def get_number():
     num_comp = []
     for i in range(0, 3):
-        num_comp.append(random.randint(0, 9))
+        winning_number = random.randint(0, 9)
+        while winning_number in num_comp:
+            winning_number = random.randint(0, 9)
+        num_comp.sort
+        num_comp.append(winning_number)
     return num_comp
 
-# User will input 3 random number between 0 to 9.
 
-
-def get_user_num():
+def get_user_number():
     user_num = []
     for i in range(0, 3):
+        # User will input 3 random number between 0 to 9.
         user_guess = int(input("Put your lucky number: "))
-    user_num.append(user_guess)
-    return user_guess
+        user_num.sort
+        user_num.append(user_guess)
+    return user_num
 
 
-int_comp = get_num_comp()
-int_user = get_user_num()
-
-# In this part we will know if the user inputed numbers are correct
-
-
-def next_millionere():
-    # If correct the output will be winner.
+def get_winner(int_comp, int_user):
     if int_comp == int_user:
-        print('--------------------------------------------')
+        print("--------------------------------------------")
         print("Winner")
-        print("You are the new millionire!")
     else:
-        # If wrong the out will be you loss.
-        print('--------------------------------------------')
-        print(f"You Loss.")
-        print(
-            f"The lucky combination are {int_comp[0]}, {int_comp[1]}, {int_comp[2]}")
+        print("--------------------------------------------")
+        print("You loss")
 
 
-next_millionaire()
-
-
-# In this part we will ask the user if He or She wants to play again.
-def kill_game():
+def play_again():
     # asks the user if they want to play again
-    print('--------------------------------------------')
-    retry = input('Do you want to play again? (y/n) ')
-    print('--------------------------------------------')
+    print("--------------------------------------------")
+    ask_user = input("Do you want to play again? (y/n) ")
+    print("--------------------------------------------")
     # If yes user will once again be ask 3 random numbers
-    if retry[0] == 'y':
-        get_num_comp()
-        get_user_num()
-        next_millionere()
-        print('--------------------------------------------')
+    if ask_user == "y":
+        get_number()
+        get_user_number()
+        get_winner(int_comp, int_user)
+        play_again()
+        print("--------------------------------------------")
     # If no the programm will end.
-    elif retry[0] == 'n':
+    elif ask_user == "n":
         exit
 
 
-kill_game()
+int_comp = get_number()
+int_user = get_user_number()
+get_winner(int_comp, int_user)
+play_again()
